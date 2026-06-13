@@ -40,10 +40,19 @@ uninstall() {
   [[ -d ${WALLPAPER_DIR}/${name}${color} ]] && rm -rfv ${WALLPAPER_DIR}/${name}${color}
 }
 
+uninstall-automatic-wallpaper() {
+  local name=${1}
+  local color="Automatic"
+
+  [[ -d ${WALLPAPER_DIR}/${name}${color} ]] && rm -rfv ${WALLPAPER_DIR}/${name}${color}
+}
+
 echo "Uninstalling '${THEME_NAME} kde themes'..."
 
 for color in "${colors[@]:-${COLOR_VARIANTS[@]}}"; do
   uninstall "${name:-${THEME_NAME}}" "${color}"
 done
+
+  uninstall-automatic-wallpaper "${THEME_NAME}"
 
 echo "Uninstall finished..."

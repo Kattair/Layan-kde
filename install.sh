@@ -56,10 +56,21 @@ install() {
   cp -rf ${SRC_DIR}/wallpaper/${name}${color}                                         ${WALLPAPER_DIR}
 }
 
+install-automatic-wallpaper() {
+  local name=${1}
+  local color="Automatic"
+
+  [[ -d ${WALLPAPER_DIR}/${name}${color} ]] && rm -rf ${WALLPAPER_DIR}/${name}${color}
+
+  cp -rf ${SRC_DIR}/wallpaper/${name}${color} ${WALLPAPER_DIR}
+}
+
 echo "Installing '${THEME_NAME} kde themes'..."
 
 for color in "${colors[@]:-${COLOR_VARIANTS[@]}}"; do
   install "${name:-${THEME_NAME}}" "${color}"
 done
+
+  install-automatic-wallpaper "${THEME_NAME}"
 
 echo "Install finished..."
